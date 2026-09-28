@@ -1,27 +1,14 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
+import LetterGlitch from './reactbits/LetterGlitch'
+import DecryptedText from './reactbits/DecryptedText'
+import ShinyText from './reactbits/ShinyText'
 import './App.css'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
-function useParticles(count) {
-  return useMemo(
-    () =>
-      Array.from({ length: count }, (_, i) => ({
-        id: i,
-        x: `${Math.random() * 100}%`,
-        size: `${1.5 + Math.random() * 2.5}px`,
-        duration: `${8 + Math.random() * 10}s`,
-        delay: `${Math.random() * 10}s`,
-        opacity: 0.3 + Math.random() * 0.4,
-      })),
-    [count],
-  )
-}
-
 function App() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('')
-  const particles = useParticles(24)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -47,21 +34,15 @@ function App() {
       <div className="orb orb-1" />
       <div className="orb orb-2" />
       <div className="orb orb-3" />
-      <div className="grid" />
-      <div className="particles">
-        {particles.map((p) => (
-          <span
-            key={p.id}
-            className="particle"
-            style={{
-              '--x': p.x,
-              '--s': p.size,
-              '--d': p.duration,
-              '--delay': p.delay,
-              '--o': p.opacity,
-            }}
-          />
-        ))}
+      <div className="letter-glitch">
+        <LetterGlitch
+          glitchColors={['#2b1a3d', '#aa3bff', '#4f9dff', '#35e6c1']}
+          glitchSpeed={70}
+          centerVignette
+          outerVignette
+          smooth
+          backgroundColor="transparent"
+        />
       </div>
       <div className="scanlines" />
 
@@ -73,9 +54,24 @@ function App() {
         <div className="brand">
           Syphar<span className="cursor" />
         </div>
-        <h1 className="title">Coming Soon</h1>
+        <h1 className="title">
+          <DecryptedText
+            text="Coming Soon"
+            animateOn="view"
+            sequential
+            revealDirection="center"
+            speed={35}
+            className="char-revealed"
+            encryptedClassName="char-encrypted"
+          />
+        </h1>
         <p className="subtitle">
-          We're building something new. Leave your email and we'll let you know the moment it's live.
+          <ShinyText
+            text="We're building something new. Leave your email and we'll let you know the moment it's live."
+            speed={4}
+            color="#9ca3af"
+            shineColor="#f3f4f6"
+          />
         </p>
         <form className="notify" onSubmit={handleSubmit}>
           <input

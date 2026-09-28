@@ -2,6 +2,6 @@
   "name": "syphar",
   "private": true,
   "dependencies": {
-    "@vercel/kv": "^3.0.0"
+    "mongodb": "^6.10.0"
   }
 }

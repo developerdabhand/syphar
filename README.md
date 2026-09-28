@@ -5,7 +5,7 @@ Monorepo for the Syphar website — currently showing a "Coming Soon" page while
 ## Structure
 
 - `client/` — React app (Vite), the public-facing site (Coming Soon page for now)
-- `api/` — Vercel Serverless Function powering the "Notify Me" email signup, backed by Vercel KV
+- `api/` — Vercel Serverless Function powering the "Notify Me" email signup, backed by MongoDB
 - `server/` — standalone Node/Express API, reserved for the full backend once the product needs one beyond the coming-soon form (not currently deployed)
 
 ## Development
@@ -27,11 +27,11 @@ npm install
 npx vercel dev
 ```
 
-Requires the `KV_REST_API_URL` / `KV_REST_API_TOKEN` env vars (see Deployment below) — `vercel dev` pulls these automatically once the project is linked and KV is connected.
+Requires the `MONGODB_URI` env var (see Deployment below) — `vercel dev` pulls it automatically once the project is linked and MongoDB is connected.
 
 ## Deployment
 
 - **Frontend + API**: deployed together on Vercel from the repo root (see `vercel.json`). The client calls `/api/notify` on the same origin, so no separate API URL is needed in production.
-- **Storage**: subscriber emails are stored in a Vercel KV (Redis) set named `subscribers`. Enable it once per project: Vercel dashboard → project → **Storage** tab → **Create Database** → **KV** → connect to this project. Vercel injects the required env vars automatically; redeploy after connecting.
-- **Sending launch emails**: not implemented yet — signups are only stored for now. When ready to notify subscribers, read the `subscribers` set from KV and send through an email provider (e.g. Resend, SendGrid).
+- **Storage**: subscriber emails are stored in a MongoDB `subscribers` collection (database `syphar`), deduped by email. Connect via Vercel dashboard → project → **Storage** tab → **MongoDB Atlas** (or set `MONGODB_URI` manually under **Environment Variables** if using your own Atlas cluster). Redeploy after connecting/setting it.
+- **Sending launch emails**: not implemented yet — signups are only stored for now. When ready to notify subscribers, read the `subscribers` collection and send through an email provider (e.g. Resend, SendGrid).
 - **Domain**: `syphar.net` domain DNS is managed on GoDaddy, pointed at Vercel.
