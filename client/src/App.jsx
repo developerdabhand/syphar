@@ -36,7 +36,7 @@ function App() {
       <div className="orb orb-3" />
       <div className="letter-glitch">
         <LetterGlitch
-          glitchColors={['#2b1a3d', '#aa3bff', '#4f9dff', '#35e6c1']}
+          glitchColors={['#14213a', '#1f3a5f', '#2f6690', '#35e6c1']}
           glitchSpeed={70}
           centerVignette
           outerVignette

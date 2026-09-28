@@ -71,8 +71,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.4;
-  mix-blend-mode: screen;
+  opacity: 0.3;
 }
 
 .scanlines {
@@ -171,15 +170,13 @@
 }
 
 .title .char-revealed {
-  background: linear-gradient(100deg, #fff 0%, var(--accent-3) 50%, #fff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #f8f9fc;
+  text-shadow: 0 0 28px rgba(53, 230, 193, 0.35);
 }
 
 .title .char-encrypted {
-  color: var(--accent-2);
-  opacity: 0.75;
+  color: var(--accent-3);
+  opacity: 0.55;
 }
 
 .subtitle {
