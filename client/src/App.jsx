@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import LetterGlitch from './reactbits/LetterGlitch'
+import Waves from './reactbits/Waves'
 import DecryptedText from './reactbits/DecryptedText'
 import ShinyText from './reactbits/ShinyText'
 import './App.css'
@@ -34,14 +34,19 @@ function App() {
       <div className="orb orb-1" />
       <div className="orb orb-2" />
       <div className="orb orb-3" />
-      <div className="letter-glitch">
-        <LetterGlitch
-          glitchColors={['#14213a', '#1f3a5f', '#2f6690', '#35e6c1']}
-          glitchSpeed={70}
-          centerVignette
-          outerVignette
-          smooth
+      <div className="waves-bg">
+        <Waves
+          lineColor="rgba(79, 157, 255, 0.22)"
           backgroundColor="transparent"
+          waveSpeedX={0.0125}
+          waveSpeedY={0.006}
+          waveAmpX={36}
+          waveAmpY={18}
+          friction={0.92}
+          tension={0.008}
+          maxCursorMove={110}
+          xGap={22}
+          yGap={34}
         />
       </div>
       <div className="scanlines" />
