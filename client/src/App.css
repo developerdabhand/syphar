@@ -1,0 +1,116 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(600px circle at 50% 20%, rgba(170, 59, 255, 0.15), transparent 60%),
+    radial-gradient(500px circle at 80% 80%, rgba(79, 157, 255, 0.12), transparent 60%),
+    var(--bg);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+  opacity: 0.5;
+}
+
+.brand {
+  position: relative;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+}
+
+.title {
+  position: relative;
+  font-size: clamp(40px, 8vw, 88px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+  background: linear-gradient(120deg, #fff 30%, var(--accent) 70%, var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  position: relative;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text-dim);
+  max-width: 520px;
+  margin: 0 0 40px;
+}
+
+.notify {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.notify input {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.notify input:focus {
+  border-color: var(--accent);
+}
+
+.notify button {
+  padding: 14px 22px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.notify button:hover {
+  opacity: 0.9;
+}
+
+.notify button:active {
+  transform: scale(0.97);
+}
+
+.status {
+  position: relative;
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--accent-2);
+  min-height: 20px;
+}
+
+.footer {
+  position: relative;
+  margin-top: 56px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
