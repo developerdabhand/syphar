@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Waves from './reactbits/Waves'
 import DecryptedText from './reactbits/DecryptedText'
-import ShinyText from './reactbits/ShinyText'
 import './App.css'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
@@ -14,7 +13,7 @@ function App() {
     e.preventDefault()
     if (!email.trim()) return
 
-    setStatus('> submitting...')
+    setStatus('Submitting...')
     try {
       const res = await fetch(`${API_URL}/api/notify`, {
         method: 'POST',
@@ -22,36 +21,32 @@ function App() {
         body: JSON.stringify({ email }),
       })
       if (!res.ok) throw new Error('Request failed')
-      setStatus("> you're on the list — we'll email you at launch")
+      setStatus("You're on the list — we'll email you at launch.")
       setEmail('')
     } catch {
-      setStatus('> connection failed — try again later')
+      setStatus("Couldn't reach the server. Try again later.")
     }
   }
 
   return (
     <div className="page">
-      <div className="orb orb-1" />
-      <div className="orb orb-2" />
-      <div className="orb orb-3" />
       <div className="waves-bg">
         <Waves
-          lineColor="rgba(79, 157, 255, 0.22)"
+          lineColor="rgba(255, 255, 255, 0.09)"
           backgroundColor="transparent"
-          waveSpeedX={0.0125}
-          waveSpeedY={0.006}
-          waveAmpX={36}
-          waveAmpY={18}
+          waveSpeedX={0.011}
+          waveSpeedY={0.005}
+          waveAmpX={30}
+          waveAmpY={14}
           friction={0.92}
           tension={0.008}
-          maxCursorMove={110}
-          xGap={22}
-          yGap={34}
+          maxCursorMove={100}
+          xGap={24}
+          yGap={36}
         />
       </div>
-      <div className="scanlines" />
 
-      <div className="card">
+      <div className="content">
         <div className="tag">
           <span className="dot" />
           Building in progress
@@ -71,12 +66,7 @@ function App() {
           />
         </h1>
         <p className="subtitle">
-          <ShinyText
-            text="We're building something new. Leave your email and we'll let you know the moment it's live."
-            speed={4}
-            color="#9ca3af"
-            shineColor="#f3f4f6"
-          />
+          We&rsquo;re building something new. Leave your email and we&rsquo;ll let you know the moment it&rsquo;s live.
         </p>
         <form className="notify" onSubmit={handleSubmit}>
           <input
@@ -86,7 +76,7 @@ function App() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button type="submit">Notify Me</button>
+          <button type="submit">Notify me</button>
         </form>
         <div className="status">{status}</div>
       </div>
