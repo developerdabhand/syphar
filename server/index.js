@@ -29,5 +29,5 @@ app.post('/api/notify', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Sypher server listening on port ${PORT}`)
+  console.log(`Syphar server listening on port ${PORT}`)
 })

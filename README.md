@@ -1,6 +1,6 @@
-# Sypher
+# Syphar
 
-Monorepo for the Sypher website — currently showing a "Coming Soon" page while the full product is built.
+Monorepo for the Syphar website — currently showing a "Coming Soon" page while the full product is built.
 
 ## Structure
 
@@ -31,4 +31,4 @@ The client reads the API base URL from `VITE_API_URL` (see `client/.env.example`
 
 - **Frontend**: deployed on Vercel, with Root Directory set to `client`.
 - **Backend**: deploy separately (Vercel Serverless/Node hosting, Render, Railway, etc.) once the API is needed beyond the coming-soon form.
-- **Domain**: `sypher` domain DNS is managed on GoDaddy, pointed at Vercel.
+- **Domain**: `syphar.net` domain DNS is managed on GoDaddy, pointed at Vercel.

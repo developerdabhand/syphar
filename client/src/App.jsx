@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="page">
       <div className="glow" />
-      <div className="brand">Sypher</div>
+      <div className="brand">Syphar</div>
       <h1 className="title">Coming Soon</h1>
       <p className="subtitle">
         We're building something new. Leave your email and we'll let you know the moment it's live.
@@ -45,7 +45,7 @@ function App() {
         <button type="submit">Notify Me</button>
       </form>
       <div className="status">{status}</div>
-      <div className="footer">&copy; {new Date().getFullYear()} Sypher. All rights reserved.</div>
+      <div className="footer">&copy; {new Date().getFullYear()} Syphar. All rights reserved.</div>
     </div>
   )
 }
