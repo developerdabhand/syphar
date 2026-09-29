@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import Container from '../layout/Container'
 import InfraGrid from '../../reactbits/InfraGrid'
 import DecryptedText from '../../reactbits/DecryptedText'
+import SpecularButton from '../../reactbits/SpecularButton'
 
 export default function Hero() {
   const handleClick = (id: string) => (e: MouseEvent) => {
@@ -46,24 +47,45 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#contact"
+            <SpecularButton
+              size="md"
+              radius={999}
+              tint="#16141c"
+              tintOpacity={1}
+              textColor="#faf8f5"
+              baseColor="#7c1fef"
+              lineColor="#c9a6ff"
+              shineSize={14}
+              proximity={260}
               onClick={handleClick('contact')}
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[15px] font-medium text-bg transition-colors hover:bg-accent-deep"
             >
               Start a project
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="#work"
+              <ArrowRight size={16} />
+            </SpecularButton>
+            <SpecularButton
+              size="md"
+              radius={999}
+              tint="#faf8f5"
+              tintOpacity={0}
+              textColor="#16141c"
+              baseColor="#d8d2e2"
+              lineColor="#7c1fef"
+              shineSize={16}
+              proximity={220}
+              className="border border-line"
               onClick={handleClick('work')}
-              className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-[15px] font-medium text-ink transition-colors hover:border-ink"
             >
               Explore our work
-            </a>
+            </SpecularButton>
           </div>
 
-          <p className="mt-8 text-[13px] text-ink-faint">Working with ambitious teams across Europe.</p>
+          <p className="mt-8 flex items-center gap-2 text-[13px] text-ink-faint">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+            </span>
+            Working with ambitious teams across Europe.
+          </p>
         </div>
       </Container>
     </section>

@@ -2,6 +2,7 @@ import { useEffect, useState, type MouseEvent } from 'react'
 import { Menu, X } from 'lucide-react'
 import clsx from 'clsx'
 import Container from '../layout/Container'
+import SpecularButton from '../../reactbits/SpecularButton'
 import { useActiveSection } from '../../lib/useActiveSection'
 
 const LINKS = [
@@ -47,8 +48,9 @@ export default function Nav() {
         <a
           href="#top"
           onClick={handleNavClick('top')}
-          className="font-mono text-sm font-medium uppercase tracking-[0.22em] text-ink"
+          className="flex items-center gap-2.5 font-mono text-sm font-medium uppercase tracking-[0.22em] text-ink"
         >
+          <img src="/favicon.svg" alt="" className="h-6 w-auto" />
           Syphar
         </a>
 
@@ -59,8 +61,8 @@ export default function Nav() {
               href={`#${link.id}`}
               onClick={handleNavClick(link.id)}
               className={clsx(
-                'text-[14px] transition-colors',
-                activeId === link.id ? 'text-ink' : 'text-ink-soft hover:text-ink',
+                'relative py-1 text-[14px] transition-colors after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:content-[""] hover:after:scale-x-100',
+                activeId === link.id ? 'text-ink after:scale-x-100' : 'text-ink-soft hover:text-ink',
               )}
               aria-current={activeId === link.id ? 'true' : undefined}
             >
@@ -70,13 +72,20 @@ export default function Nav() {
         </nav>
 
         <div className="hidden md:block">
-          <a
-            href="#contact"
+          <SpecularButton
+            size="sm"
+            radius={999}
+            tint="#16141c"
+            tintOpacity={1}
+            textColor="#faf8f5"
+            baseColor="#7c1fef"
+            lineColor="#c9a6ff"
+            shineSize={14}
+            proximity={200}
             onClick={handleNavClick('contact')}
-            className="inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-[14px] font-medium text-bg transition-colors hover:bg-accent-deep"
           >
             Start a project
-          </a>
+          </SpecularButton>
         </div>
 
         <button
@@ -104,13 +113,21 @@ export default function Nav() {
               </a>
             ))}
           </nav>
-          <a
-            href="#contact"
+          <SpecularButton
+            size="md"
+            radius={999}
+            tint="#16141c"
+            tintOpacity={1}
+            textColor="#faf8f5"
+            baseColor="#7c1fef"
+            lineColor="#c9a6ff"
+            shineSize={14}
+            proximity={200}
+            className="mt-6 w-full"
             onClick={handleNavClick('contact')}
-            className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-ink px-5 py-3.5 text-[15px] font-medium text-bg"
           >
             Start a project
-          </a>
+          </SpecularButton>
         </div>
       )}
     </header>

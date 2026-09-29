@@ -2,6 +2,7 @@ import { useRef, useState, type ChangeEvent, type FormEvent, type MouseEvent } f
 import { ArrowRight, Loader2 } from 'lucide-react'
 import Container from '../layout/Container'
 import Reveal from '../layout/Reveal'
+import SpecularButton from '../../reactbits/SpecularButton'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -129,10 +130,19 @@ export default function CTA() {
                   />
                 </div>
 
-                <button
+                <SpecularButton
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-[15px] font-medium text-noir-ink transition-colors hover:bg-accent-soft disabled:opacity-60 sm:w-auto"
+                  size="md"
+                  radius={999}
+                  tint="#7c1fef"
+                  tintOpacity={1}
+                  textColor="#f5f3f8"
+                  baseColor="#17141f"
+                  lineColor="#ffffff"
+                  shineSize={14}
+                  proximity={260}
+                  className="mt-7 w-full sm:w-auto"
                 >
                   {status === 'submitting' ? (
                     <>
@@ -142,7 +152,7 @@ export default function CTA() {
                   ) : (
                     'Start a conversation'
                   )}
-                </button>
+                </SpecularButton>
 
                 <p className="mt-4 text-[12.5px] leading-[1.6] text-noir-ink-soft">
                   We only use this to reply to your message — see our{' '}
