@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://syphar.net/sitemap.xml

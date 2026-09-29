@@ -1,29 +1,78 @@
-:root {
-  --bg: #050506;
-  --surface: rgba(255, 255, 255, 0.03);
-  --text: #f2f2f3;
-  --text-dim: #888c93;
-  --border: rgba(255, 255, 255, 0.1);
-  --status: #34d399;
+@import 'tailwindcss';
 
-  font: 16px/1.5 'Space Grotesk', system-ui, 'Segoe UI', Roboto, sans-serif;
-  color-scheme: dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@theme {
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-ink: #16141c;
+  --color-ink-soft: #5c5766;
+  --color-ink-faint: #726d79;
+  --color-line: #e7e1ed;
+
+  --color-accent: #7c1fef;
+  --color-accent-deep: #57119e;
+  --color-accent-soft: #9a4bf5;
+  --color-accent-tint: #f2ecfc;
+
+  --color-noir: #0e0c13;
+  --color-noir-raised: #17141f;
+  --color-noir-ink: #f5f3f8;
+  --color-noir-ink-soft: #a8a2b3;
+  --color-noir-line: #2a2632;
+
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: 'Fraunces', ui-serif, Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --container-content: 1240px;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-noir-ink);
 }
 
 #root {
-  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
