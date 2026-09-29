@@ -9,9 +9,9 @@ export default function Process() {
   const sectionRef = useRef<HTMLDivElement | null>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start 0.7', 'end 0.4'],
+    offset: ['start center', 'end center'],
   })
-  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 })
+  const progress = useSpring(scrollYProgress, { stiffness: 150, damping: 26, mass: 0.2 })
 
   return (
     <section className="border-t border-line py-24 md:py-32">
