@@ -85,7 +85,7 @@ export default function CTA() {
                 />
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field
-                    label="Name"
+                    label="Name *"
                     id="name"
                     value={form.name}
                     onChange={handleChange('name')}
@@ -94,7 +94,7 @@ export default function CTA() {
                     maxLength={MAX_LENGTH.name}
                   />
                   <Field
-                    label="Email"
+                    label="Email *"
                     id="email"
                     type="email"
                     value={form.email}
@@ -116,7 +116,7 @@ export default function CTA() {
                 </div>
                 <div className="mt-5">
                   <label htmlFor="message" className="block font-mono text-[11px] uppercase tracking-[0.12em] text-noir-ink-soft">
-                    What are you trying to build?
+                    What are you trying to build? *
                   </label>
                   <textarea
                     id="message"

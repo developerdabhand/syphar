@@ -2,6 +2,7 @@
   "name": "syphar",
   "private": true,
   "dependencies": {
-    "mongodb": "^6.10.0"
+    "mongodb": "^6.10.0",
+    "resend": "^6.30.0"
   }
 }
