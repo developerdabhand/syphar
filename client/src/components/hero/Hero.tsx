@@ -1,7 +1,7 @@
 import type { MouseEvent } from 'react'
 import { ArrowRight } from 'lucide-react'
 import Container from '../layout/Container'
-import InfraGrid from '../../reactbits/InfraGrid'
+import Topography from '../../reactbits/Topography'
 import DecryptedText from '../../reactbits/DecryptedText'
 import SpecularButton from '../../reactbits/SpecularButton'
 
@@ -13,10 +13,32 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-18">
-      <InfraGrid className="opacity-90" />
+      <div className="absolute inset-0">
+        <Topography
+          lowColor="#ede6ff"
+          midColor="#7c1fef"
+          highColor="#47bfff"
+          speed={0.22}
+          morphAmount={2.1}
+          bands={3}
+          thickness={0.012}
+          scale={1.15}
+          glow={0.4}
+          contrast={2.4}
+          opacity={0.85}
+          grainIntensity={0.02}
+          mouseRadius={0.35}
+          mouseStrength={0.3}
+          lightMode
+        />
+      </div>
       <div
         className="pointer-events-none absolute inset-0"
-        style={{ background: 'radial-gradient(ellipse 70% 55% at 30% 40%, transparent, var(--color-bg) 78%)' }}
+        style={{ background: 'radial-gradient(ellipse 75% 60% at 30% 38%, transparent, var(--color-bg) 72%)' }}
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+        style={{ background: 'linear-gradient(to bottom, transparent, var(--color-bg))' }}
       />
 
       <Container className="relative">
