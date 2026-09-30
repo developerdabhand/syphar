@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import Nav from './components/navigation/Nav'
 import Hero from './components/hero/Hero'
 import Services from './components/services/Services'
@@ -38,6 +39,7 @@ function App() {
       </main>
       <Footer />
       <StickyCTA />
+      <Analytics />
     </div>
   )
 }
