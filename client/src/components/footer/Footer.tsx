@@ -19,7 +19,10 @@ export default function Footer() {
       <Container>
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-mono text-sm font-medium uppercase tracking-[0.22em] text-ink">Syphar</p>
+            <p className="flex items-center gap-2.5 font-mono text-sm font-medium uppercase tracking-[0.22em] text-ink">
+              <img src="/logo-96.png" alt="" width={32} height={32} loading="lazy" className="h-8 w-8" />
+              Syphar
+            </p>
             <p className="mt-4 max-w-[240px] text-[14px] leading-[1.7] text-ink-soft">
               A technology partner for ambitious European businesses — software, AI, and cloud, built around how you
               actually work.

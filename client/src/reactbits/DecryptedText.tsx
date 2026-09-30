@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
-import { motion } from 'motion/react'
 
 type RevealDirection = 'start' | 'end' | 'center'
 type AnimateOn = 'hover' | 'view' | 'click' | 'inViewHover'
@@ -372,7 +371,7 @@ export default function DecryptedText({
         : {}
 
   return (
-    <motion.span className={parentClassName} ref={containerRef} style={styles.wrapper} {...animateProps}>
+    <span className={parentClassName} ref={containerRef} style={styles.wrapper} {...animateProps}>
       <span style={styles.srOnly}>{displayText}</span>
 
       <span aria-hidden="true">
@@ -386,6 +385,6 @@ export default function DecryptedText({
           )
         })}
       </span>
-    </motion.span>
+    </span>
   )
 }

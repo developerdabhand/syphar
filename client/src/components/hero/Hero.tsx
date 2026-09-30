@@ -1,9 +1,18 @@
 import type { MouseEvent } from 'react'
-import { ArrowRight } from 'lucide-react'
+import { lazy } from 'react'
+import { ArrowRight, Check } from 'lucide-react'
 import Container from '../layout/Container'
-import Topography from '../../reactbits/Topography'
+import LazyMount from '../layout/LazyMount'
 import DecryptedText from '../../reactbits/DecryptedText'
 import SpecularButton from '../../reactbits/SpecularButton'
+
+const Topography = lazy(() => import('../../reactbits/Topography'))
+
+const TRUST_POINTS = [
+  'Reply within one business day',
+  'Work directly with the engineers',
+  'European time zones, GDPR-conscious',
+]
 
 export default function Hero() {
   const handleClick = (id: string) => (e: MouseEvent) => {
@@ -13,7 +22,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-18">
-      <div className="absolute inset-0">
+      <LazyMount when="idle" className="absolute inset-0">
         <Topography
           lowColor="#ede6ff"
           midColor="#7c1fef"
@@ -31,7 +40,7 @@ export default function Hero() {
           mouseStrength={0.3}
           lightMode
         />
-      </div>
+      </LazyMount>
       <div
         className="pointer-events-none absolute inset-0"
         style={{ background: 'radial-gradient(ellipse 75% 60% at 30% 38%, transparent, var(--color-bg) 72%)' }}
@@ -97,17 +106,18 @@ export default function Hero() {
               className="border border-line"
               onClick={handleClick('work')}
             >
-              Explore our work
+              See our work
             </SpecularButton>
           </div>
 
-          <p className="mt-8 flex items-center gap-2 text-[13px] text-ink-faint">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-            </span>
-            Working with ambitious teams across Europe.
-          </p>
+          <ul className="mt-9 flex flex-col gap-2.5 text-[14px] text-ink-soft sm:flex-row sm:flex-wrap sm:gap-x-7">
+            {TRUST_POINTS.map((point) => (
+              <li key={point} className="flex items-center gap-2">
+                <Check size={15} className="shrink-0 text-accent" strokeWidth={2.5} aria-hidden="true" />
+                {point}
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>

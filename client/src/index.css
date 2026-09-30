@@ -67,7 +67,21 @@ body {
   transform: translateY(0);
 }
 
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.panel-in {
+  animation: panel-in 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .panel-in {
+    animation: none;
+  }
   html {
     scroll-behavior: auto;
   }
