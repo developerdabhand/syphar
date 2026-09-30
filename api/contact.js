@@ -3,7 +3,9 @@ import { Resend } from 'resend'
 
 const uri = process.env.MONGODB_URI
 
-const NOTIFY_EMAIL = 'garvshrivastava2403@gmail.com'
+// Until a domain is verified with Resend, this MUST be the email address the
+// Resend account was signed up with, or Resend will reject the send.
+const NOTIFY_EMAIL = process.env.CONTACT_TO_EMAIL || 'garvshrivastava2403@gmail.com'
 // Works immediately with no domain setup, since Resend lets an unverified
 // account send from this address to the email it was signed up with. Once
 // syphar.net is verified with Resend, set CONTACT_FROM_EMAIL to send from
@@ -63,36 +65,36 @@ export default async function handler(req, res) {
     return res.status(201).json({ message: 'Received' })
   }
 
-  if (!uri) {
-    console.error('MONGODB_URI is not set')
-    return res.status(500).json({ error: 'Server is not configured.' })
-  }
-
   const cleanName = name.trim()
   const cleanEmail = email.trim()
   const cleanCompany = typeof company === 'string' ? company.trim() : ''
   const cleanMessage = message.trim()
 
-  try {
-    const client = await getClient()
-    const db = client.db('syphar')
-    await db.collection('inquiries').insertOne({
-      name: cleanName,
-      email: cleanEmail,
-      company: cleanCompany,
-      message: cleanMessage,
-      createdAt: new Date(),
-    })
-  } catch (err) {
-    console.error('contact error', err)
-    return res.status(500).json({ error: 'Failed to save your message.' })
+  // Saving and emailing are independent: the visitor only sees an error if
+  // BOTH fail, so a lead is never lost to a single misconfigured service.
+  let saved = false
+  if (uri) {
+    try {
+      const client = await getClient()
+      await client.db('syphar').collection('inquiries').insertOne({
+        name: cleanName,
+        email: cleanEmail,
+        company: cleanCompany,
+        message: cleanMessage,
+        createdAt: new Date(),
+      })
+      saved = true
+    } catch (err) {
+      console.error('contact save failed', err)
+    }
+  } else {
+    console.error('MONGODB_URI is not set — inquiry not saved to the database')
   }
 
-  // The inquiry is already saved at this point, so an email hiccup shouldn't
-  // fail the request — the submission isn't lost, it just wasn't forwarded.
+  let emailed = false
   if (resend) {
     try {
-      await resend.emails.send({
+      const { error } = await resend.emails.send({
         from: FROM_EMAIL,
         to: NOTIFY_EMAIL,
         replyTo: cleanEmail,
@@ -103,13 +105,22 @@ export default async function handler(req, res) {
           `Company: ${cleanCompany || '—'}`,
           '',
           cleanMessage,
-        ].join('\n'),
+        ].join('
+'),
       })
+      // Resend reports rejections (unverified domain, wrong recipient) as a
+      // returned error, not a thrown one.
+      if (error) console.error('contact email rejected by Resend', error)
+      else emailed = true
     } catch (err) {
       console.error('contact email forward failed', err)
     }
   } else {
-    console.warn('RESEND_API_KEY is not set — inquiry saved but not forwarded by email')
+    console.error('RESEND_API_KEY is not set — inquiry not forwarded by email')
+  }
+
+  if (!saved && !emailed) {
+    return res.status(500).json({ error: 'Failed to deliver your message.' })
   }
 
   return res.status(201).json({ message: 'Received' })

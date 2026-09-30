@@ -1,5 +1,4 @@
 import { useEffect, useRef, type CSSProperties, type MouseEventHandler, type ReactNode } from 'react'
-import { Color, Mesh, Program, Renderer, Triangle } from 'ogl'
 import './SpecularButton.css'
 
 const PAD = 20
@@ -166,6 +165,22 @@ export default function SpecularButton({
     if (!btn || !fx) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+    let disposed = false
+    let teardown: (() => void) | undefined
+    // ogl is loaded on demand so it stays out of the initial bundle.
+    import('ogl').then((ogl) => {
+      if (disposed) return
+      teardown = init(btn, fx, ogl)
+    })
+    return () => {
+      disposed = true
+      teardown?.()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function init(btn: HTMLButtonElement, fx: HTMLSpanElement, ogl: typeof import('ogl')) {
+    const { Color, Mesh, Program, Renderer, Triangle } = ogl
     const dpr = window.devicePixelRatio || 1
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr })
     const gl = renderer.gl
@@ -272,15 +287,35 @@ export default function SpecularButton({
     }
     raf = requestAnimationFrame(update)
 
+    // Don't burn GPU on buttons that are scrolled out of view or in a background tab.
+    let onScreen = true
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting
+      sync()
+    })
+    io.observe(btn)
+    const sync = () => {
+      const shouldRun = onScreen && !document.hidden
+      if (shouldRun && raf === 0) {
+        last = performance.now()
+        raf = requestAnimationFrame(update)
+      } else if (!shouldRun && raf !== 0) {
+        cancelAnimationFrame(raf)
+        raf = 0
+      }
+    }
+    document.addEventListener('visibilitychange', sync)
+
     return () => {
       cancelAnimationFrame(raf)
+      io.disconnect()
+      document.removeEventListener('visibilitychange', sync)
       ro.disconnect()
       window.removeEventListener('pointermove', onPointerMove)
       if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas)
       gl.getExtension('WEBGL_lose_context')?.loseContext()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }
 
   const style = {
     '--sb-radius': `${radius}px`,

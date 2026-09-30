@@ -1,12 +1,15 @@
+import { lazy } from 'react'
 import Container from '../layout/Container'
 import Eyebrow from '../layout/Eyebrow'
 import Reveal from '../layout/Reveal'
-import Orb from '../../reactbits/Orb'
+import LazyMount from '../layout/LazyMount'
 import { processSteps } from '../../data/process'
+
+const Orb = lazy(() => import('../../reactbits/Orb'))
 
 export default function Process() {
   return (
-    <section className="border-t border-line py-24 md:py-32">
+    <section id="process" className="border-t border-line py-24 md:py-32">
       <Container>
         <Reveal>
           <Eyebrow>How we work</Eyebrow>
@@ -38,7 +41,9 @@ export default function Process() {
 
           <Reveal delay={140} className="md:col-span-7">
             <div className="relative h-[360px] overflow-hidden rounded-2xl border border-noir-line bg-noir sm:h-[440px] md:h-full md:min-h-[520px]">
-              <Orb hue={0} hoverIntensity={0.35} rotateOnHover backgroundColor="#0e0c13" />
+              <LazyMount className="absolute inset-0">
+                <Orb hue={0} hoverIntensity={0.35} rotateOnHover backgroundColor="#0e0c13" />
+              </LazyMount>
               <div className="pointer-events-none absolute inset-x-0 bottom-0 p-8">
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-noir-ink-soft">
                   Five steps. One accountable process.

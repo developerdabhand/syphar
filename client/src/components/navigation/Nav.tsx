@@ -7,6 +7,7 @@ import { useActiveSection } from '../../lib/useActiveSection'
 
 const LINKS = [
   { id: 'services', label: 'Services' },
+  { id: 'process', label: 'Process' },
   { id: 'work', label: 'Work' },
   { id: 'about', label: 'About' },
   { id: 'insights', label: 'Insights' },
@@ -48,9 +49,10 @@ export default function Nav() {
         <a
           href="#top"
           onClick={handleNavClick('top')}
+          aria-label="Syphar — back to top"
           className="flex items-center gap-2.5 font-mono text-sm font-medium uppercase tracking-[0.22em] text-ink"
         >
-          <img src="/favicon.svg" alt="" className="h-6 w-auto" />
+          <img src="/logo-96.png" alt="" width={32} height={32} className="h-8 w-8" />
           Syphar
         </a>
 

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
 import clsx from 'clsx'
 import Container from '../layout/Container'
 import Eyebrow from '../layout/Eyebrow'
@@ -45,14 +44,9 @@ export default function Services() {
           </Reveal>
 
           <Reveal delay={140} className="md:col-span-7">
-            <AnimatePresence mode="wait">
-              <motion.div
+              <div
                 key={active.id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-2xl border border-line bg-surface p-8 md:p-10"
+                className="panel-in rounded-2xl border border-line bg-surface p-8 md:p-10"
               >
                 <ActiveIcon className="text-accent-deep" size={28} strokeWidth={1.5} />
                 <h3 className="mt-6 text-[22px] font-semibold text-ink">{active.name}</h3>
@@ -65,8 +59,7 @@ export default function Services() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
-            </AnimatePresence>
+              </div>
           </Reveal>
         </div>
       </Container>

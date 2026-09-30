@@ -1,8 +1,10 @@
 import { useRef, useState, type ChangeEvent, type FormEvent, type MouseEvent } from 'react'
-import { ArrowRight, Loader2 } from 'lucide-react'
+import { ArrowRight, Loader2, Mail } from 'lucide-react'
+import clsx from 'clsx'
 import Container from '../layout/Container'
 import Reveal from '../layout/Reveal'
 import SpecularButton from '../../reactbits/SpecularButton'
+import { services } from '../../data/services'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -13,8 +15,12 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 export default function CTA() {
   const [status, setStatus] = useState<Status>('idle')
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
+  const [interests, setInterests] = useState<string[]>([])
   const [website, setWebsite] = useState('') // honeypot — left blank by real visitors
   const startedAtRef = useRef(Date.now())
+
+  const toggleInterest = (name: string) =>
+    setInterests((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]))
 
   const handleChange = (field: keyof typeof form) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }))
@@ -29,11 +35,18 @@ export default function CTA() {
       const res = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, website, startedAt: startedAtRef.current }),
+        body: JSON.stringify({
+          ...form,
+          // The API takes a fixed set of fields, so service interest travels with the message.
+          message: interests.length ? `Interested in: ${interests.join(', ')}\n\n${form.message}` : form.message,
+          website,
+          startedAt: startedAtRef.current,
+        }),
       })
       if (!res.ok) throw new Error('Request failed')
       setStatus('success')
       setForm({ name: '', email: '', company: '', message: '' })
+      setInterests([])
     } catch {
       setStatus('error')
     }
@@ -62,6 +75,20 @@ export default function CTA() {
               View our work
               <ArrowRight size={15} />
             </a>
+            <div className="mt-10 border-t border-noir-line pt-8">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-noir-ink-soft">Prefer email?</p>
+              <a
+                href="mailto:hello@syphar.net"
+                className="mt-3 inline-flex items-center gap-2 text-[16px] font-medium text-noir-ink transition-colors hover:text-accent-soft"
+              >
+                <Mail size={16} aria-hidden="true" />
+                hello@syphar.net
+              </a>
+              <ul className="mt-6 flex flex-col gap-2 text-[13.5px] text-noir-ink-soft">
+                <li>&bull; A reply from an engineer within one business day</li>
+                <li>&bull; No obligation, no sales scripts</li>
+              </ul>
+            </div>
           </Reveal>
 
           <Reveal delay={100} className="md:col-span-7">
@@ -115,6 +142,32 @@ export default function CTA() {
                     maxLength={MAX_LENGTH.company}
                   />
                 </div>
+                <fieldset className="mt-5">
+                  <legend className="font-mono text-[11px] uppercase tracking-[0.12em] text-noir-ink-soft">
+                    I&rsquo;m interested in (optional)
+                  </legend>
+                  <div className="mt-2.5 flex flex-wrap gap-2">
+                    {services.map((service) => {
+                      const on = interests.includes(service.name)
+                      return (
+                        <button
+                          key={service.id}
+                          type="button"
+                          aria-pressed={on}
+                          onClick={() => toggleInterest(service.name)}
+                          className={clsx(
+                            'rounded-full border px-3.5 py-1.5 text-[13px] transition-colors',
+                            on
+                              ? 'border-accent-soft bg-accent/25 text-noir-ink'
+                              : 'border-white/15 text-noir-ink-soft hover:border-white/30 hover:text-noir-ink',
+                          )}
+                        >
+                          {service.name}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </fieldset>
                 <div className="mt-5">
                   <label htmlFor="message" className="block font-mono text-[11px] uppercase tracking-[0.12em] text-noir-ink-soft">
                     What are you trying to build? *
@@ -163,8 +216,12 @@ export default function CTA() {
                 </p>
 
                 {status === 'error' && (
-                  <p className="mt-4 text-[13px] text-noir-ink-soft">
-                    Something went wrong — please try again, or reach us directly.
+                  <p role="alert" className="mt-4 text-[13px] text-noir-ink-soft">
+                    Something went wrong — please try again, or email us directly at{' '}
+                    <a href="mailto:hello@syphar.net" className="underline underline-offset-2 hover:text-noir-ink">
+                      hello@syphar.net
+                    </a>
+                    .
                   </p>
                 )}
               </form>

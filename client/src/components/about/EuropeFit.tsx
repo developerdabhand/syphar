@@ -1,6 +1,9 @@
+import { lazy } from 'react'
 import Container from '../layout/Container'
 import Reveal from '../layout/Reveal'
-import Waves from '../../reactbits/Waves'
+import LazyMount from '../layout/LazyMount'
+
+const Waves = lazy(() => import('../../reactbits/Waves'))
 
 const POINTS = [
   'Clear, direct communication throughout',
@@ -15,6 +18,7 @@ const POINTS = [
 export default function EuropeFit() {
   return (
     <section className="relative overflow-hidden border-t border-noir-line bg-noir py-24 md:py-32">
+      <LazyMount className="absolute inset-0">
       <Waves
         lineColor="rgba(124, 31, 239, 0.16)"
         backgroundColor="transparent"
@@ -29,6 +33,7 @@ export default function EuropeFit() {
         yGap={40}
         className="opacity-70"
       />
+      </LazyMount>
       <div
         className="pointer-events-none absolute inset-0"
         style={{ background: 'radial-gradient(ellipse 60% 60% at 80% 20%, transparent, var(--color-noir) 75%)' }}
