@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb'
+import { confirmationHtml, confirmationSubject, confirmationText } from './_confirmation-email.js'
 
 const uri = process.env.MONGODB_URI
 
@@ -12,10 +13,30 @@ const NOTIFY_EMAILS = (process.env.CONTACT_TO_EMAIL || 'garvshrivastava2403@gmai
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'Syphar <noreply@syphar.net>'
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY
+const SENDER_NAME = 'Syphar'
 
 function parseSender(value) {
   const match = value.match(/^\s*(.*?)\s*<([^>]+)>\s*$/)
-  return match ? { name: match[1], email: match[2] } : { email: value.trim() }
+  // Always show "Syphar" as the sender name, even if CONTACT_FROM_EMAIL is a
+  // bare address, so the inbox never shows just "hello" or "noreply".
+  return match ? { name: match[1] || SENDER_NAME, email: match[2] } : { name: SENDER_NAME, email: value.trim() }
+}
+
+async function sendBrevoEmail(payload, label) {
+  try {
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'api-key': BREVO_API_KEY, 'content-type': 'application/json', accept: 'application/json' },
+      body: JSON.stringify({ sender: parseSender(FROM_EMAIL), ...payload }),
+    })
+    // Brevo reports rejections (unverified sender, bad key) as a non-2xx
+    // response, not a thrown error.
+    if (response.ok) return true
+    console.error(`${label} rejected by Brevo`, response.status, await response.text())
+  } catch (err) {
+    console.error(`${label} failed`, err)
+  }
+  return false
 }
 
 const MAX_LENGTH = {
@@ -97,12 +118,11 @@ export default async function handler(req, res) {
 
   let emailed = false
   if (BREVO_API_KEY) {
-    try {
-      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-        method: 'POST',
-        headers: { 'api-key': BREVO_API_KEY, 'content-type': 'application/json', accept: 'application/json' },
-        body: JSON.stringify({
-          sender: parseSender(FROM_EMAIL),
+    // Notify the team and confirm to the visitor independently: a failed
+    // confirmation never turns a delivered inquiry into an error.
+    const [notified] = await Promise.all([
+      sendBrevoEmail(
+        {
           to: NOTIFY_EMAILS.map((email) => ({ email })),
           replyTo: { email: cleanEmail, name: cleanName },
           subject: `New project inquiry from ${cleanName}`,
@@ -113,15 +133,22 @@ export default async function handler(req, res) {
             '',
             cleanMessage,
           ].join('\n'),
-        }),
-      })
-      // Brevo reports rejections (unverified sender, bad key) as a non-2xx
-      // response, not a thrown error.
-      if (response.ok) emailed = true
-      else console.error('contact email rejected by Brevo', response.status, await response.text())
-    } catch (err) {
-      console.error('contact email forward failed', err)
-    }
+        },
+        'contact email',
+      ),
+      sendBrevoEmail(
+        {
+          to: [{ email: cleanEmail, name: cleanName }],
+          // Visitors replying to the confirmation reach the team's inbox.
+          replyTo: { email: NOTIFY_EMAILS[0] },
+          subject: confirmationSubject(),
+          htmlContent: confirmationHtml(cleanName),
+          textContent: confirmationText(cleanName),
+        },
+        'confirmation email',
+      ),
+    ])
+    emailed = notified
   } else {
     console.error('BREVO_API_KEY is not set — inquiry not forwarded by email')
   }
