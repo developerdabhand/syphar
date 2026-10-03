@@ -112,8 +112,7 @@ export default async function handler(req, res) {
             `Company: ${cleanCompany || '—'}`,
             '',
             cleanMessage,
-          ].join('
-'),
+          ].join('\n'),
         }),
       })
       // Brevo reports rejections (unverified sender, bad key) as a non-2xx
