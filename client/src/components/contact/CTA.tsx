@@ -1,5 +1,5 @@
 import { useRef, useState, type ChangeEvent, type FormEvent, type MouseEvent } from 'react'
-import { ArrowRight, Loader2, Mail } from 'lucide-react'
+import { ArrowRight, Loader2 } from 'lucide-react'
 import clsx from 'clsx'
 import Container from '../layout/Container'
 import Reveal from '../layout/Reveal'
@@ -76,15 +76,7 @@ export default function CTA() {
               <ArrowRight size={15} />
             </a>
             <div className="mt-10 border-t border-noir-line pt-8">
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-noir-ink-soft">Prefer email?</p>
-              <a
-                href="mailto:hello@syphar.net"
-                className="mt-3 inline-flex items-center gap-2 text-[16px] font-medium text-noir-ink transition-colors hover:text-accent-soft"
-              >
-                <Mail size={16} aria-hidden="true" />
-                hello@syphar.net
-              </a>
-              <ul className="mt-6 flex flex-col gap-2 text-[13.5px] text-noir-ink-soft">
+              <ul className="flex flex-col gap-2 text-[13.5px] text-noir-ink-soft">
                 <li>&bull; A reply from an engineer within one business day</li>
                 <li>&bull; No obligation, no sales scripts</li>
               </ul>
@@ -217,11 +209,7 @@ export default function CTA() {
 
                 {status === 'error' && (
                   <p role="alert" className="mt-4 text-[13px] text-noir-ink-soft">
-                    Something went wrong — please try again, or email us directly at{' '}
-                    <a href="mailto:hello@syphar.net" className="underline underline-offset-2 hover:text-noir-ink">
-                      hello@syphar.net
-                    </a>
-                    .
+                    Something went wrong — please try again in a moment.
                   </p>
                 )}
               </form>

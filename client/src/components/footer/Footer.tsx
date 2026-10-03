@@ -67,11 +67,6 @@ export default function Footer() {
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint">Contact</p>
             <ul className="mt-4 flex flex-col gap-2.5">
               <li>
-                <a href="mailto:hello@syphar.net" className="text-[14px] text-ink-soft hover:text-ink">
-                  hello@syphar.net
-                </a>
-              </li>
-              <li>
                 <a href="#contact" onClick={scrollTo('contact')} className="text-[14px] text-ink-soft hover:text-ink">
                   Start a project
                 </a>

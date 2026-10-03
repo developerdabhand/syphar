@@ -8,8 +8,8 @@ const NOTIFY_EMAILS = (process.env.CONTACT_TO_EMAIL || 'garvshrivastava2403@gmai
   .map((e) => e.trim())
   .filter(Boolean)
 // Must be a sender verified in Brevo (Senders, Domains & Dedicated IPs),
-// e.g. "Syphar <hello@syphar.net>".
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'Syphar <hello@syphar.net>'
+// e.g. "Syphar <noreply@syphar.net>".
+const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'Syphar <noreply@syphar.net>'
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY
 
