@@ -9,16 +9,13 @@ interface ProjectVisualProps {
 /**
  * Preview tile for a project. We don't have permission to publish real product
  * screenshots, so this shows an illustrative mockup (or, without one, an
- * abstract generated pattern) and says so.
+ * abstract generated pattern).
  */
 export default function ProjectVisual({ seed, className = '', src, alt = '' }: ProjectVisualProps) {
   if (src) {
     return (
       <div className={`relative overflow-hidden rounded-xl border border-line bg-accent-tint ${className}`}>
         <img src={src} alt={alt} loading="lazy" decoding="async" className="h-full w-full object-cover object-center" />
-        <span className="absolute left-3 top-3 rounded-full bg-ink/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">
-          Illustrative
-        </span>
       </div>
     )
   }
