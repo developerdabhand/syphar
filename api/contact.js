@@ -1,18 +1,22 @@
 import { MongoClient } from 'mongodb'
-import { Resend } from 'resend'
 
 const uri = process.env.MONGODB_URI
 
-// Until a domain is verified with Resend, this MUST be the email address the
-// Resend account was signed up with, or Resend will reject the send.
-const NOTIFY_EMAIL = process.env.CONTACT_TO_EMAIL || 'garvshrivastava2403@gmail.com'
-// Works immediately with no domain setup, since Resend lets an unverified
-// account send from this address to the email it was signed up with. Once
-// syphar.net is verified with Resend, set CONTACT_FROM_EMAIL to send from
-// the real domain instead (e.g. "Syphar <hello@syphar.net>").
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'Syphar Contact Form <onboarding@resend.dev>'
+// Comma-separated list of addresses that receive inquiry emails.
+const NOTIFY_EMAILS = (process.env.CONTACT_TO_EMAIL || 'garvshrivastava2403@gmail.com')
+  .split(',')
+  .map((e) => e.trim())
+  .filter(Boolean)
+// Must be a sender verified in Brevo (Senders, Domains & Dedicated IPs),
+// e.g. "Syphar <hello@syphar.net>".
+const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'Syphar <hello@syphar.net>'
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
+const BREVO_API_KEY = process.env.BREVO_API_KEY
+
+function parseSender(value) {
+  const match = value.match(/^\s*(.*?)\s*<([^>]+)>\s*$/)
+  return match ? { name: match[1], email: match[2] } : { email: value.trim() }
+}
 
 const MAX_LENGTH = {
   name: 100,
@@ -92,31 +96,35 @@ export default async function handler(req, res) {
   }
 
   let emailed = false
-  if (resend) {
+  if (BREVO_API_KEY) {
     try {
-      const { error } = await resend.emails.send({
-        from: FROM_EMAIL,
-        to: NOTIFY_EMAIL,
-        replyTo: cleanEmail,
-        subject: `New project inquiry from ${cleanName}`,
-        text: [
-          `Name: ${cleanName}`,
-          `Email: ${cleanEmail}`,
-          `Company: ${cleanCompany || '—'}`,
-          '',
-          cleanMessage,
-        ].join('
+      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: { 'api-key': BREVO_API_KEY, 'content-type': 'application/json', accept: 'application/json' },
+        body: JSON.stringify({
+          sender: parseSender(FROM_EMAIL),
+          to: NOTIFY_EMAILS.map((email) => ({ email })),
+          replyTo: { email: cleanEmail, name: cleanName },
+          subject: `New project inquiry from ${cleanName}`,
+          textContent: [
+            `Name: ${cleanName}`,
+            `Email: ${cleanEmail}`,
+            `Company: ${cleanCompany || '—'}`,
+            '',
+            cleanMessage,
+          ].join('
 '),
+        }),
       })
-      // Resend reports rejections (unverified domain, wrong recipient) as a
-      // returned error, not a thrown one.
-      if (error) console.error('contact email rejected by Resend', error)
-      else emailed = true
+      // Brevo reports rejections (unverified sender, bad key) as a non-2xx
+      // response, not a thrown error.
+      if (response.ok) emailed = true
+      else console.error('contact email rejected by Brevo', response.status, await response.text())
     } catch (err) {
       console.error('contact email forward failed', err)
     }
   } else {
-    console.error('RESEND_API_KEY is not set — inquiry not forwarded by email')
+    console.error('BREVO_API_KEY is not set — inquiry not forwarded by email')
   }
 
   if (!saved && !emailed) {
