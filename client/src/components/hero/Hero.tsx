@@ -38,7 +38,7 @@ export default function Hero() {
           lowColor="#ede6ff"
           midColor="#7c1fef"
           highColor="#47bfff"
-          speed={0.12}
+          speed={0.22}
           morphAmount={2.1}
           bands={3}
           thickness={0.012}

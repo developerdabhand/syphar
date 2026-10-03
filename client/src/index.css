@@ -78,9 +78,9 @@ body {
   animation: panel-in 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hero headline accent word: letters rise and un-blur one after another, then an
-   underline draws in. Layout never changes (no scrambled characters), so the
-   heading can't jitter or reflow. */
+/* Hero headline accent word: letters rise and un-blur one after another.
+   Layout never changes (no scrambled characters), so the heading can't
+   jitter or reflow. */
 .hero-word {
   position: relative;
   display: inline-block;
@@ -96,21 +96,6 @@ body {
   animation-delay: calc(500ms + var(--i) * 120ms);
 }
 
-.hero-word::after {
-  content: '';
-  position: absolute;
-  left: 0.02em;
-  right: 0.06em;
-  bottom: -0.04em;
-  height: 0.075em;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-accent-deep), var(--color-accent-soft), #47bfff);
-  transform: scaleX(0);
-  transform-origin: left center;
-  animation: hero-underline 1.3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-  animation-delay: 2000ms;
-}
-
 @keyframes hero-letter {
   to {
     opacity: 1;
@@ -119,21 +104,11 @@ body {
   }
 }
 
-@keyframes hero-underline {
-  to {
-    transform: scaleX(1);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-word-letter {
     opacity: 1;
     transform: none;
     filter: none;
-    animation: none;
-  }
-  .hero-word::after {
-    transform: none;
     animation: none;
   }
   .panel-in {
