@@ -46,6 +46,17 @@ async function sendBrevoEmail(payload, label) {
   return false
 }
 
+// Project budget bands in euros. Must match BUDGET_OPTIONS in
+// client/src/components/contact/CTA.tsx.
+const BUDGET_OPTIONS = [
+  'Under €5,000',
+  '€5,000 – €15,000',
+  '€15,000 – €40,000',
+  '€40,000 – €100,000',
+  '€100,000+',
+  'Not sure yet – need guidance',
+]
+
 const MAX_LENGTH = {
   name: 100,
   email: 254,
@@ -77,7 +88,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email, company, message, website, startedAt } = req.body || {}
+  const { name, email, company, budget, message, website, startedAt } = req.body || {}
 
   const isSpam =
     (typeof website === 'string' && website.trim().length > 0) ||
@@ -89,8 +100,10 @@ export default async function handler(req, res) {
   const isValidMessage = withinLength(message, MAX_LENGTH.message) && message.trim().length > 0
   const isValidCompany = company === undefined || company === '' || withinLength(company, MAX_LENGTH.company)
 
-  if (!isValidEmail || !isValidName || !isValidMessage || !isValidCompany) {
-    return res.status(400).json({ error: 'Name, a valid email, and a message are required.' })
+  const isValidBudget = typeof budget === 'string' && BUDGET_OPTIONS.includes(budget)
+
+  if (!isValidEmail || !isValidName || !isValidMessage || !isValidCompany || !isValidBudget) {
+    return res.status(400).json({ error: 'Name, a valid email, a budget range, and a message are required.' })
   }
 
   if (isSpam) {
@@ -112,6 +125,7 @@ export default async function handler(req, res) {
         name: cleanName,
         email: cleanEmail,
         company: cleanCompany,
+        budget,
         message: cleanMessage,
         createdAt: new Date(),
       })
@@ -123,7 +137,7 @@ export default async function handler(req, res) {
     console.error('MONGODB_URI is not set — inquiry not saved to the database')
   }
 
-  const inquiry = { name: cleanName, email: cleanEmail, company: cleanCompany, message: cleanMessage }
+  const inquiry = { name: cleanName, email: cleanEmail, company: cleanCompany, budget, message: cleanMessage }
 
   let emailed = false
   if (BREVO_API_KEY) {

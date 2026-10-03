@@ -304,8 +304,8 @@ export function adminSubject(name) {
   return `New project inquiry from ${name}`
 }
 
-export function adminText({ name, email, company, message }) {
-  return [`Name: ${name}`, `Email: ${email}`, `Company: ${company || '—'}`, '', message].join('\n')
+export function adminText({ name, email, company, budget, message }) {
+  return [`Name: ${name}`, `Email: ${email}`, `Company: ${company || '—'}`, `Budget: ${budget}`, '', message].join('\n')
 }
 
 // Outlook for Windows ignores padding on links, so the button is VML there
@@ -326,7 +326,7 @@ function replyButton(href) {
             </tr></table>`
 }
 
-export function adminHtml({ name, email, company, message }) {
+export function adminHtml({ name, email, company, budget, message }) {
   const { interest, body: messageBody } = splitInterest(message)
   const safeName = escapeHtml(name)
   const safeEmail = escapeHtml(email)
@@ -344,6 +344,7 @@ export function adminHtml({ name, email, company, message }) {
       `<a class="dm-accent" href="mailto:${safeEmail}" style="color:${COLOR.accent};text-decoration:none;font-weight:600;">${safeEmail}</a>`,
     ),
     detailRow('Company', company ? escapeHtml(company) : `<span class="dm-soft" style="color:${COLOR.inkSoft};">Not provided</span>`),
+    detailRow('Budget', `<strong>${escapeHtml(budget)}</strong>`),
     interest ? detailRow('Interested in', escapeHtml(interest)) : '',
   ].join('')
 

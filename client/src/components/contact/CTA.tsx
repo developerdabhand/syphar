@@ -1,5 +1,5 @@
 import { useRef, useState, type ChangeEvent, type FormEvent, type MouseEvent } from 'react'
-import { ArrowRight, Loader2 } from 'lucide-react'
+import { ArrowRight, ChevronDown, Loader2 } from 'lucide-react'
 import clsx from 'clsx'
 import Container from '../layout/Container'
 import Reveal from '../layout/Reveal'
@@ -10,11 +10,22 @@ const API_URL = import.meta.env.VITE_API_URL || ''
 
 const MAX_LENGTH = { name: 100, email: 254, company: 200, message: 5000 }
 
+// Project budget bands in euros. The API validates against this same list
+// (api/contact.js), so keep the two in sync.
+const BUDGET_OPTIONS = [
+  'Under €5,000',
+  '€5,000 – €15,000',
+  '€15,000 – €40,000',
+  '€40,000 – €100,000',
+  '€100,000+',
+  'Not sure yet – need guidance',
+]
+
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 export default function CTA() {
   const [status, setStatus] = useState<Status>('idle')
-  const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', company: '', budget: '', message: '' })
   const [interests, setInterests] = useState<string[]>([])
   const [website, setWebsite] = useState('') // honeypot — left blank by real visitors
   const startedAtRef = useRef(Date.now())
@@ -22,13 +33,13 @@ export default function CTA() {
   const toggleInterest = (name: string) =>
     setInterests((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]))
 
-  const handleChange = (field: keyof typeof form) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (field: keyof typeof form) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }))
   }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return
+    if (!form.name.trim() || !form.email.trim() || !form.budget || !form.message.trim()) return
 
     setStatus('submitting')
     try {
@@ -45,7 +56,7 @@ export default function CTA() {
       })
       if (!res.ok) throw new Error('Request failed')
       setStatus('success')
-      setForm({ name: '', email: '', company: '', message: '' })
+      setForm({ name: '', email: '', company: '', budget: '', message: '' })
       setInterests([])
     } catch {
       setStatus('error')
@@ -124,7 +135,7 @@ export default function CTA() {
                     maxLength={MAX_LENGTH.email}
                   />
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 grid gap-5 sm:grid-cols-2">
                   <Field
                     label="Company (optional)"
                     id="company"
@@ -133,6 +144,37 @@ export default function CTA() {
                     autoComplete="organization"
                     maxLength={MAX_LENGTH.company}
                   />
+                  <div>
+                    <label htmlFor="budget" className="block font-mono text-[11px] uppercase tracking-[0.12em] text-noir-ink-soft">
+                      Budget (EUR) *
+                    </label>
+                    <div className="relative mt-2.5">
+                      <select
+                        id="budget"
+                        required
+                        value={form.budget}
+                        onChange={handleChange('budget')}
+                        className={clsx(
+                          'w-full appearance-none rounded-lg border border-white/15 bg-white/4 py-3 pl-4 pr-10 text-[15px] outline-none transition-colors focus:border-accent-soft',
+                          form.budget ? 'text-noir-ink' : 'text-noir-ink-soft/70',
+                        )}
+                      >
+                        <option value="" disabled className="bg-noir-raised text-noir-ink-soft">
+                          Select a range
+                        </option>
+                        {BUDGET_OPTIONS.map((option) => (
+                          <option key={option} value={option} className="bg-noir-raised text-noir-ink">
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown
+                        size={16}
+                        aria-hidden="true"
+                        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-noir-ink-soft"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <fieldset className="mt-5">
                   <legend className="font-mono text-[11px] uppercase tracking-[0.12em] text-noir-ink-soft">
