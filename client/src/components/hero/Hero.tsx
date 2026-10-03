@@ -1,9 +1,8 @@
-import type { MouseEvent } from 'react'
+import type { CSSProperties, MouseEvent } from 'react'
 import { lazy } from 'react'
 import { ArrowRight, Check } from 'lucide-react'
 import Container from '../layout/Container'
 import LazyMount from '../layout/LazyMount'
-import DecryptedText from '../../reactbits/DecryptedText'
 import SpecularButton from '../../reactbits/SpecularButton'
 
 const Topography = lazy(() => import('../../reactbits/Topography'))
@@ -13,6 +12,18 @@ const TRUST_POINTS = [
   'Work directly with the engineers',
   'European time zones, GDPR-conscious',
 ]
+
+function AnimatedWord({ text, className }: { text: string; className?: string }) {
+  return (
+    <span className={`hero-word ${className ?? ''}`} aria-label={text}>
+      {text.split('').map((char, i) => (
+        <span key={i} className="hero-word-letter" style={{ '--i': i } as CSSProperties} aria-hidden="true">
+          {char}
+        </span>
+      ))}
+    </span>
+  )
+}
 
 export default function Hero() {
   const handleClick = (id: string) => (e: MouseEvent) => {
@@ -27,7 +38,7 @@ export default function Hero() {
           lowColor="#ede6ff"
           midColor="#7c1fef"
           highColor="#47bfff"
-          speed={0.22}
+          speed={0.12}
           morphAmount={2.1}
           bands={3}
           thickness={0.012}
@@ -58,18 +69,7 @@ export default function Hero() {
 
           <h1 className="mt-7 text-[40px] font-semibold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[54px] lg:text-[68px]">
             Technology built around your{' '}
-            <span className="text-accent-deep">
-              <DecryptedText
-                text="business."
-                animateOn="view"
-                sequential
-                revealDirection="start"
-                speed={32}
-                maxIterations={8}
-                className="text-accent-deep"
-                encryptedClassName="text-accent-soft/50"
-              />
-            </span>
+            <AnimatedWord text="business." className="text-accent-deep" />
           </h1>
 
           <p className="mt-7 max-w-[520px] text-[18px] leading-[1.6] text-ink-soft">
