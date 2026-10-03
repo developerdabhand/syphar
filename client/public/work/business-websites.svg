@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustrative business marketing website">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2ecfc"/><stop offset="1" stop-color="#e0d0fa"/></linearGradient>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#57119e"/><stop offset="1" stop-color="#9a4bf5"/></linearGradient>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#57119e" flood-opacity="0.24"/></filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="62" width="620" height="456" rx="16" fill="#fff" filter="url(#sh)"/>
+    <path d="M76 62h588a16 16 0 0 1 16 16v30H60V78a16 16 0 0 1 16-16z" fill="#f4f1f8"/>
+    <circle cx="84" cy="85" r="5" fill="#ff6b6b"/><circle cx="102" cy="85" r="5" fill="#ffc247"/><circle cx="120" cy="85" r="5" fill="#3ccf7a"/>
+    <rect x="150" y="75" width="300" height="20" rx="10" fill="#fff"/><text x="166" y="89" font-size="11" fill="#5c5766">yourbrand.com</text>
+    <rect x="84" y="124" width="26" height="26" rx="8" fill="#7c1fef"/><rect x="118" y="132" width="52" height="9" rx="4.5" fill="#16141c"/>
+    <g fill="#c9c2d4"><rect x="360" y="132" width="40" height="8" rx="4"/><rect x="414" y="132" width="40" height="8" rx="4"/><rect x="468" y="132" width="40" height="8" rx="4"/></g>
+    <rect x="584" y="124" width="76" height="26" rx="13" fill="#7c1fef"/><text x="622" y="141" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Contact</text>
+    <text x="84" y="214" font-size="28" font-weight="700" fill="#16141c">Grow your business</text>
+    <text x="84" y="248" font-size="28" font-weight="700" fill="#7c1fef">with a site that sells.</text>
+    <rect x="84" y="272" width="250" height="9" rx="4.5" fill="#d9d3e2"/><rect x="84" y="290" width="200" height="9" rx="4.5" fill="#e7e1ed"/>
+    <rect x="84" y="318" width="116" height="38" rx="19" fill="#7c1fef"/><text x="142" y="342" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Get started</text>
+    <rect x="212" y="318" width="116" height="38" rx="19" fill="#fff" stroke="#d9d3e2"/><text x="270" y="342" font-size="13" font-weight="600" fill="#16141c" text-anchor="middle">Our work</text>
+    <rect x="392" y="190" width="268" height="176" rx="16" fill="url(#hero)"/>
+    <circle cx="560" cy="250" r="34" fill="#fff" opacity="0.18"/><path d="M392 330l70-58 54 40 50-36 94 52v38a16 16 0 0 1-16 16H408a16 16 0 0 1-16-16z" fill="#fff" opacity="0.22"/>
+    <rect x="84" y="392" width="170" height="100" rx="12" fill="#faf8f5" stroke="#e7e1ed"/><rect x="100" y="408" width="30" height="30" rx="9" fill="#f2ecfc"/><rect x="100" y="450" width="90" height="9" rx="4.5" fill="#16141c" opacity="0.8"/><rect x="100" y="468" width="130" height="7" rx="3.5" fill="#d9d3e2"/>
+    <rect x="268" y="392" width="170" height="100" rx="12" fill="#faf8f5" stroke="#e7e1ed"/><rect x="284" y="408" width="30" height="30" rx="9" fill="#f2ecfc"/><rect x="284" y="450" width="80" height="9" rx="4.5" fill="#16141c" opacity="0.8"/><rect x="284" y="468" width="130" height="7" rx="3.5" fill="#d9d3e2"/>
+    <rect x="452" y="392" width="208" height="100" rx="12" fill="#faf8f5" stroke="#e7e1ed"/><rect x="468" y="408" width="30" height="30" rx="9" fill="#f2ecfc"/><rect x="468" y="450" width="100" height="9" rx="4.5" fill="#16141c" opacity="0.8"/><rect x="468" y="468" width="160" height="7" rx="3.5" fill="#d9d3e2"/>
+    <g filter="url(#sh)">
+      <rect x="610" y="170" width="140" height="300" rx="24" fill="#16141c"/>
+      <rect x="617" y="178" width="126" height="284" rx="18" fill="#fff"/>
+      <rect x="629" y="194" width="20" height="20" rx="6" fill="#7c1fef"/><rect x="718" y="199" width="14" height="3" rx="1.5" fill="#16141c"/><rect x="718" y="205" width="14" height="3" rx="1.5" fill="#16141c"/>
+      <rect x="629" y="232" width="98" height="9" rx="4.5" fill="#16141c"/><rect x="629" y="248" width="74" height="9" rx="4.5" fill="#7c1fef"/>
+      <rect x="629" y="270" width="90" height="6" rx="3" fill="#d9d3e2"/><rect x="629" y="282" width="70" height="6" rx="3" fill="#e7e1ed"/>
+      <rect x="629" y="302" width="64" height="24" rx="12" fill="#7c1fef"/>
+      <rect x="629" y="342" width="98" height="64" rx="10" fill="url(#hero)"/>
+      <rect x="629" y="416" width="98" height="30" rx="8" fill="#faf8f5" stroke="#e7e1ed"/>
+    </g>
+    <g filter="url(#sh)">
+      <circle cx="108" cy="498" r="40" fill="#fff"/>
+      <circle cx="108" cy="498" r="30" fill="none" stroke="#e3f6ec" stroke-width="8"/>
+      <circle cx="108" cy="498" r="30" fill="none" stroke="#1f9d63" stroke-width="8" stroke-linecap="round" stroke-dasharray="183 189" transform="rotate(-90 108 498)"/>
+      <text x="108" y="505" font-size="20" font-weight="700" fill="#16141c" text-anchor="middle">98</text>
+      <text x="156" y="508" font-size="11" font-weight="600" fill="#5c5766">Performance score</text>
+    </g>
+  </g>
+</svg>

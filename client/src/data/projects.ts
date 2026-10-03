@@ -3,6 +3,7 @@ import type { Project } from '../types'
 export const projects: Project[] = [
   {
     id: 'b2b-platform',
+    image: '/work/b2b-platform.svg',
     name: 'B2B Operations Platform',
     industry: 'B2B / Operations',
     built:
@@ -13,6 +14,7 @@ export const projects: Project[] = [
   },
   {
     id: 'social-platform',
+    image: '/work/social-platform.svg',
     name: 'Custom Social Platform',
     industry: 'Social / Community',
     built:
@@ -22,6 +24,7 @@ export const projects: Project[] = [
   },
   {
     id: 'erp-system',
+    image: '/work/erp-system.svg',
     name: 'ERP System',
     industry: 'Enterprise / Resource Planning',
     built:
@@ -31,6 +34,7 @@ export const projects: Project[] = [
   },
   {
     id: 'business-websites',
+    image: '/work/business-websites.svg',
     name: 'Business & Marketing Websites',
     industry: 'Web',
     built:

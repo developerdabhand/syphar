@@ -23,6 +23,8 @@ export interface Project {
   built: string
   technology: string[]
   outcome: string
+  /** Path under /public to an illustrative preview image. */
+  image?: string
   featured?: boolean
 }
 

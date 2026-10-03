@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustrative ERP system dashboard">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2ecfc"/><stop offset="1" stop-color="#d6c4f7"/></linearGradient>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c1fef" stop-opacity="0.35"/><stop offset="1" stop-color="#7c1fef" stop-opacity="0"/></linearGradient>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#57119e" flood-opacity="0.22"/></filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="50" y="60" width="700" height="480" rx="18" fill="#fff" filter="url(#sh)"/>
+    <path d="M68 60h664a18 18 0 0 1 18 18v32H50V78a18 18 0 0 1 18-18z" fill="#faf8f5"/>
+    <circle cx="76" cy="85" r="5" fill="#e7e1ed"/><circle cx="94" cy="85" r="5" fill="#e7e1ed"/><circle cx="112" cy="85" r="5" fill="#e7e1ed"/>
+    <text x="150" y="90" font-size="13" font-weight="700" fill="#16141c">Resource Planning</text>
+    <rect x="620" y="76" width="110" height="24" rx="12" fill="#f2ecfc"/><text x="675" y="92" font-size="11" fill="#57119e" font-weight="600" text-anchor="middle">Q3 overview</text>
+    <rect x="70" y="128" width="152" height="64" rx="12" fill="#7c1fef"/><text x="86" y="152" font-size="12" fill="#e9dcff">Inventory</text><text x="86" y="178" font-size="20" font-weight="700" fill="#fff">8,420 SKUs</text>
+    <rect x="236" y="128" width="152" height="64" rx="12" fill="#faf8f5" stroke="#e7e1ed"/><text x="252" y="152" font-size="12" fill="#5c5766">Purchase orders</text><text x="252" y="178" font-size="20" font-weight="700" fill="#16141c">142</text>
+    <rect x="402" y="128" width="152" height="64" rx="12" fill="#faf8f5" stroke="#e7e1ed"/><text x="418" y="152" font-size="12" fill="#5c5766">Production</text><text x="418" y="178" font-size="20" font-weight="700" fill="#16141c">87% util.</text>
+    <rect x="568" y="128" width="162" height="64" rx="12" fill="#faf8f5" stroke="#e7e1ed"/><text x="584" y="152" font-size="12" fill="#5c5766">Net margin</text><text x="584" y="178" font-size="20" fill="#16141c" font-weight="700">21.6%</text>
+    <rect x="70" y="210" width="350" height="312" rx="12" fill="#fff" stroke="#e7e1ed"/>
+    <text x="88" y="236" font-size="13" font-weight="600" fill="#16141c">Stock levels</text>
+    <g font-size="11" fill="#5c5766">
+      <text x="88" y="272">Raw materials</text><rect x="190" y="263" width="200" height="10" rx="5" fill="#f2ecfc"/><rect x="190" y="263" width="156" height="10" rx="5" fill="#7c1fef"/>
+      <text x="88" y="310">Components</text><rect x="190" y="301" width="200" height="10" rx="5" fill="#f2ecfc"/><rect x="190" y="301" width="118" height="10" rx="5" fill="#9a4bf5"/>
+      <text x="88" y="348">Finished goods</text><rect x="190" y="339" width="200" height="10" rx="5" fill="#f2ecfc"/><rect x="190" y="339" width="176" height="10" rx="5" fill="#7c1fef"/>
+      <text x="88" y="386">Packaging</text><rect x="190" y="377" width="200" height="10" rx="5" fill="#f2ecfc"/><rect x="190" y="377" width="64" height="10" rx="5" fill="#ec5b8f"/>
+      <text x="88" y="424">Spare parts</text><rect x="190" y="415" width="200" height="10" rx="5" fill="#f2ecfc"/><rect x="190" y="415" width="140" height="10" rx="5" fill="#9a4bf5"/>
+    </g>
+    <rect x="88" y="452" width="150" height="50" rx="10" fill="#fff4f7" stroke="#f7c8d8"/><text x="102" y="473" font-size="11" font-weight="600" fill="#c2255c">Low stock alert</text><text x="102" y="490" font-size="11" fill="#5c5766">Packaging · reorder</text>
+    <rect x="436" y="210" width="294" height="176" rx="12" fill="#fff" stroke="#e7e1ed"/>
+    <text x="454" y="236" font-size="13" font-weight="600" fill="#16141c">Revenue vs. cost</text>
+    <path d="M454 360 L494 330 L534 340 L574 300 L614 312 L654 270 L694 282 L712 262 V366 H454Z" fill="url(#area)"/>
+    <polyline points="454,360 494,330 534,340 574,300 614,312 654,270 694,282 712,262" fill="none" stroke="#7c1fef" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <polyline points="454,352 494,346 534,342 574,334 614,336 654,322 694,324 712,316" fill="none" stroke="#c9c2d4" stroke-width="2.5" stroke-dasharray="5 5" stroke-linejoin="round"/>
+    <rect x="436" y="402" width="294" height="120" rx="12" fill="#fff" stroke="#e7e1ed"/>
+    <text x="454" y="428" font-size="13" font-weight="600" fill="#16141c">Recent activity</text>
+    <circle cx="462" cy="452" r="6" fill="#1f9d63"/><rect x="478" y="448" width="150" height="8" rx="4" fill="#d9d3e2"/><rect x="666" y="448" width="50" height="8" rx="4" fill="#e7e1ed"/>
+    <circle cx="462" cy="474" r="6" fill="#7c1fef"/><rect x="478" y="470" width="120" height="8" rx="4" fill="#d9d3e2"/><rect x="666" y="470" width="50" height="8" rx="4" fill="#e7e1ed"/>
+    <circle cx="462" cy="496" r="6" fill="#ec5b8f"/><rect x="478" y="492" width="140" height="8" rx="4" fill="#d9d3e2"/><rect x="666" y="492" width="50" height="8" rx="4" fill="#e7e1ed"/>
+  </g>
+</svg>

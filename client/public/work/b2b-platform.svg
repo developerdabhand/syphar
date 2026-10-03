@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Illustrative B2B operations dashboard">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2ecfc"/><stop offset="1" stop-color="#dccbfa"/></linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a4bf5"/><stop offset="1" stop-color="#7c1fef"/></linearGradient>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#57119e" flood-opacity="0.22"/></filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="50" y="60" width="700" height="480" rx="18" fill="#fff" filter="url(#sh)"/>
+    <path d="M68 60h102v480H68a18 18 0 0 1-18-18V78a18 18 0 0 1 18-18z" fill="#16141c"/>
+    <circle cx="76" cy="90" r="9" fill="#9a4bf5"/><rect x="92" y="85" width="52" height="10" rx="5" fill="#f5f3f8"/>
+    <rect x="68" y="130" width="86" height="28" rx="8" fill="#7c1fef"/><rect x="80" y="141" width="50" height="7" rx="3.5" fill="#fff"/>
+    <rect x="80" y="184" width="62" height="7" rx="3.5" fill="#6b6578"/><rect x="80" y="214" width="70" height="7" rx="3.5" fill="#6b6578"/>
+    <rect x="80" y="244" width="48" height="7" rx="3.5" fill="#6b6578"/><rect x="80" y="274" width="66" height="7" rx="3.5" fill="#6b6578"/>
+    <rect x="190" y="78" width="250" height="26" rx="13" fill="#f4f1f8"/><rect x="206" y="88" width="90" height="7" rx="3.5" fill="#c9c2d4"/>
+    <circle cx="716" cy="91" r="13" fill="#e7e1ed"/>
+    <rect x="190" y="124" width="170" height="82" rx="12" fill="#faf8f5" stroke="#e7e1ed"/>
+    <text x="206" y="150" font-size="12" fill="#5c5766">Monthly revenue</text><text x="206" y="184" font-size="26" font-weight="700" fill="#16141c">€248k</text><text x="300" y="184" font-size="12" font-weight="600" fill="#1f9d63">+12.4%</text>
+    <rect x="375" y="124" width="170" height="82" rx="12" fill="#faf8f5" stroke="#e7e1ed"/>
+    <text x="391" y="150" font-size="12" fill="#5c5766">Open orders</text><text x="391" y="184" font-size="26" font-weight="700" fill="#16141c">1,284</text><text x="470" y="184" font-size="12" font-weight="600" fill="#1f9d63">+8.1%</text>
+    <rect x="560" y="124" width="170" height="82" rx="12" fill="#faf8f5" stroke="#e7e1ed"/>
+    <text x="576" y="150" font-size="12" fill="#5c5766">On-time delivery</text><text x="576" y="184" font-size="26" font-weight="700" fill="#16141c">96%</text><text x="640" y="184" font-size="12" font-weight="600" fill="#1f9d63">+2.0%</text>
+    <rect x="190" y="222" width="340" height="170" rx="12" fill="#fff" stroke="#e7e1ed"/>
+    <text x="206" y="246" font-size="13" font-weight="600" fill="#16141c">Orders by week</text>
+    <g fill="url(#bar)"><rect x="210" y="330" width="26" height="46" rx="5"/><rect x="250" y="312" width="26" height="64" rx="5"/><rect x="290" y="322" width="26" height="54" rx="5"/><rect x="330" y="288" width="26" height="88" rx="5"/><rect x="370" y="300" width="26" height="76" rx="5"/><rect x="410" y="272" width="26" height="104" rx="5"/><rect x="450" y="284" width="26" height="92" rx="5"/><rect x="490" y="258" width="26" height="118" rx="5"/></g>
+    <rect x="545" y="222" width="185" height="170" rx="12" fill="#fff" stroke="#e7e1ed"/>
+    <text x="561" y="246" font-size="13" font-weight="600" fill="#16141c">Accounts</text>
+    <circle cx="637" cy="320" r="42" fill="none" stroke="#f2ecfc" stroke-width="16"/>
+    <circle cx="637" cy="320" r="42" fill="none" stroke="#7c1fef" stroke-width="16" stroke-dasharray="170 264" transform="rotate(-90 637 320)"/>
+    <circle cx="637" cy="320" r="42" fill="none" stroke="#9a4bf5" stroke-width="16" stroke-dasharray="52 264" stroke-dashoffset="-176" transform="rotate(-90 637 320)" opacity="0.55"/>
+    <text x="637" y="326" font-size="16" font-weight="700" fill="#16141c" text-anchor="middle">312</text>
+    <rect x="190" y="408" width="540" height="116" rx="12" fill="#fff" stroke="#e7e1ed"/>
+    <rect x="206" y="424" width="70" height="8" rx="4" fill="#c9c2d4"/><rect x="380" y="424" width="50" height="8" rx="4" fill="#c9c2d4"/><rect x="520" y="424" width="50" height="8" rx="4" fill="#c9c2d4"/><rect x="650" y="424" width="40" height="8" rx="4" fill="#c9c2d4"/>
+    <line x1="206" y1="446" x2="714" y2="446" stroke="#f0ebf5"/>
+    <rect x="206" y="458" width="110" height="9" rx="4.5" fill="#d9d3e2"/><rect x="380" y="458" width="64" height="9" rx="4.5" fill="#e7e1ed"/><rect x="520" y="454" width="62" height="18" rx="9" fill="#e3f6ec"/><rect x="650" y="458" width="48" height="9" rx="4.5" fill="#e7e1ed"/>
+    <line x1="206" y1="480" x2="714" y2="480" stroke="#f0ebf5"/>
+    <rect x="206" y="492" width="94" height="9" rx="4.5" fill="#d9d3e2"/><rect x="380" y="492" width="72" height="9" rx="4.5" fill="#e7e1ed"/><rect x="520" y="488" width="62" height="18" rx="9" fill="#f2ecfc"/><rect x="650" y="492" width="40" height="9" rx="4.5" fill="#e7e1ed"/>
+  </g>
+</svg>

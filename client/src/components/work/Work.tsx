@@ -20,7 +20,7 @@ export default function Work() {
 
         <Reveal delay={80}>
           <article className="mt-16 grid gap-8 rounded-2xl border border-line p-6 transition-colors hover:border-accent/40 sm:p-8 md:grid-cols-2 md:items-center md:gap-12 md:p-10">
-            <ProjectVisual seed={1} className="aspect-[4/3] w-full" />
+            <ProjectVisual seed={1} src={featured.image} alt={`${featured.name} preview`} className="aspect-[4/3] w-full" />
             <div>
               <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink-faint">{featured.industry}</p>
               <h3 className="mt-3 text-[24px] font-semibold text-ink">{featured.name}</h3>
@@ -46,7 +46,7 @@ export default function Work() {
           {rest.map((project, i) => (
             <Reveal key={project.id} delay={i * 70}>
               <article className="group h-full rounded-2xl border border-line p-6 transition-colors hover:border-accent/40">
-                <ProjectVisual seed={i + 2} className="aspect-[16/10] w-full" />
+                <ProjectVisual seed={i + 2} src={project.image} alt={`${project.name} preview`} className="aspect-[16/10] w-full" />
                 <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint">
                   {project.industry}
                 </p>
