@@ -1,5 +1,12 @@
 import { MongoClient } from 'mongodb'
-import { confirmationHtml, confirmationSubject, confirmationText } from './_confirmation-email.js'
+import {
+  adminHtml,
+  adminSubject,
+  adminText,
+  confirmationHtml,
+  confirmationSubject,
+  confirmationText,
+} from './_confirmation-email.js'
 
 const uri = process.env.MONGODB_URI
 
@@ -116,6 +123,8 @@ export default async function handler(req, res) {
     console.error('MONGODB_URI is not set — inquiry not saved to the database')
   }
 
+  const inquiry = { name: cleanName, email: cleanEmail, company: cleanCompany, message: cleanMessage }
+
   let emailed = false
   if (BREVO_API_KEY) {
     // Notify the team and confirm to the visitor independently: a failed
@@ -125,22 +134,15 @@ export default async function handler(req, res) {
         {
           to: NOTIFY_EMAILS.map((email) => ({ email })),
           replyTo: { email: cleanEmail, name: cleanName },
-          subject: `New project inquiry from ${cleanName}`,
-          textContent: [
-            `Name: ${cleanName}`,
-            `Email: ${cleanEmail}`,
-            `Company: ${cleanCompany || '—'}`,
-            '',
-            cleanMessage,
-          ].join('\n'),
+          subject: adminSubject(cleanName),
+          htmlContent: adminHtml(inquiry),
+          textContent: adminText(inquiry),
         },
         'contact email',
       ),
       sendBrevoEmail(
         {
           to: [{ email: cleanEmail, name: cleanName }],
-          // Visitors replying to the confirmation reach the team's inbox.
-          replyTo: { email: NOTIFY_EMAILS[0] },
           subject: confirmationSubject(),
           htmlContent: confirmationHtml(cleanName),
           textContent: confirmationText(cleanName),
